@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submission</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- LINK FOR THE NAVBAR SECTION  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="navbar.css">
+    <!-- LINK FOR THE NAVBAR SECTION  -->
+
+    <!-- LINKS FOR HERO SECTION -->
+    <link rel="stylesheet" href="hero.css">
+    <!-- LINKS FOR HERO SECTION -->
+
+    <style>
+        /* body {font-family: Arial;} */
+
+        /* Style the tab */
+        .tab {
+            overflow: hidden;
+            /* border: 1px solid #ccc; */
+            background-color: #f1f1f1;
+            margin-top: 200px;
+        }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            /* border: 1px solid #ccc; */
+            border-top: none;
+        }
+
+        /* Style for tab content */
+        .tabcontent {
+            display: none;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        /* Style for active tab content */
+        .tabcontent.active {
+            display: block;
+        }
+
+        /* Button styling */
+        .nav-button {
+            background-color: #5e72e4;
+            /* Green background */
+            border: none;
+            /* Remove borders */
+            color: white;
+            /* White text */
+            padding: 15px 32px;
+            /* Some padding */
+            text-align: center;
+            /* Centered text */
+            text-decoration: none;
+            /* Remove underline */
+            display: inline-block;
+            /* Make the container inline-block */
+            font-size: 16px;
+            /* Increase font size */
+            margin: 4px 2px;
+            /* Some margin */
+            transition-duration: 0.4s;
+            /* Make it transition over 0.4 seconds */
+            cursor: pointer;
+            /* Add a pointer cursor on hover */
+            border-radius: 12px;
+            /* Rounded corners */
+        }
+
+        .nav-button:hover {
+            background-color: white;
+            /* Add a white background on hover */
+            color: black;
+            /* Add a black text color on hover */
+            border: 2px solid #5e72e4;
+            /* Add a green border */
+        }
+
+        /* Center the buttons within the form */
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        /* Loader styling */
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #3498db;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+
+
+
+        /* popup css */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+        }
+    </style>
+</head>
+
+<body style="display: flex; justify-content: space-between; align-items: center; flex-direction: column;">
+
+    <!-- HEADER SECTION STARTS HERE -->
+    <script src="header.js"></script>
+    <!-- HEADER SECTION ENDS HERE -->
+
+
+
+
+    <div class="popup" id="popup">
+        <h2 style="color: green;">Form submitted successfully!</h2>
+    </div>
+
+    <section>
+        <div class="tab" id="homes">
+            <button class="tablinks" onclick="openCity(event, 'London')">Hotel Information</button>
+            <button class="tablinks" onclick="openCity(event, 'Paris')">Room Details</button>
+            <button class="tablinks" onclick="openCity(event, 'Tokyo')">OTA Credentials</button>
+        </div>
+
+        <div id="London" class="tabcontent form-container">
+            <h2 >Submit Your Hotel Information for London</h2>
+            <form id="londonForm" enctype="multipart/form-data">
+                <!-- Form fields for London -->
+                <label for="ownerName">Owner Name</label>
+                <input type="text" id="ownerName" name="ownerName" placeholder="Enter owner name" required>
+                <label for="contactNumber">Contact Number</label>
+                <input type="tel" id="contactNumber" name="contactNumber" placeholder="Enter contact number" required>
+                <label for="gmName">Name of The G.M</label>
+                <input type="text" id="gmName" name="gmName" placeholder="Enter G.M name" required>
+                <label for="gmContactPhone">Contact Phone (G.M)</label>
+                <input type="tel" id="gmContactPhone" name="gmContactPhone" placeholder="Enter G.M contact phone"
+                    required>
+                <label for="companyName">Company Name</label>
+                <input type="text" id="companyName" name="companyName" placeholder="Enter company name" required>
+                <label for="companyDisplayName">Company Display Name</label>
+                <input type="text" id="companyDisplayName" name="companyDisplayName"
+                    placeholder="Enter company display name" required>
+                <label for="contactEmail">Contact Email</label>
+                <input type="email" id="contactEmail" name="contactEmail" placeholder="Enter contact email" required>
+                <label for="contactPhone">Contact Phone</label>
+                <input type="tel" id="contactPhone" name="contactPhone" placeholder="Enter contact phone" required>
+                <label for="hotelWebUrl">Hotel Web URL</label>
+                <input type="url" id="hotelWebUrl" name="hotelWebUrl" placeholder="Enter hotel web URL" required>
+                <label for="address">Address</label>
+                <textarea id="address" name="address" placeholder="Enter address" required></textarea>
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" placeholder="Enter state" required>
+                <label for="pincode">Pincode</label>
+                <input type="text" id="pincode" name="pincode" placeholder="Enter pincode" required>
+                <label for="checkIn">Check In Time</label>
+                <input type="time" id="checkIn" name="checkIn" required>
+                <label for="checkOut">Check Out Time</label>
+                <input type="time" id="checkOut" name="checkOut" required>
+                <label for="images">Upload Images</label>
+                <input type="file" id="images" name="images" accept="image/*" multiple required>
+
+                <div class="button-container">
+                    <button type="button" class="nav-button" onclick="nextTab('Paris')">Next</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="Paris" class="tabcontent form-container">
+            <h2>Submit Your Room Details</h2>
+            <form id="parisForm" enctype="multipart/form-data">
+                <!-- Form fields for Paris -->
+                <label for="fname">Room Name</label><br>
+                <input type="text" id="fname" name="fname" ><br>
+                <label for="lname">Rate Plane</label><br>
+                <input type="text" id="lname" name="lname"><br><br>
+
+                <div class="button-container">
+                    <button type="button" class="nav-button" onclick="prevTab('London')">Previous</button>
+                    <button type="button" class="nav-button" onclick="nextTab('Tokyo')">Next</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="Tokyo" class="tabcontent form-container">
+            <h2>Submit Your Hotel Information for Tokyo</h2>
+            <form id="tokyoForm" enctype="multipart/form-data">
+                <!-- Form fields for Tokyo -->
+                <label for="fnames">First name:</label><br>
+                <input type="text" id="fnames" name="fnames" value="John"><br>
+                <label for="lnames">Last name:</label><br>
+                <input type="text" id="lnames" name="lnames" value="Doe"><br><br>
+                <div class="button-container">
+                    <button type="button" class="nav-button" onclick="prevTab('Paris')">Previous</button>
+                    <button type="button" class="nav-button" onclick="submitAllForms()">Submit All</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Loader -->
+    <div class="loader" id="loader"></div>
+
+    <script>
+
+
+
+        // // Function to validate the first form
+        // function validateForm() {
+        //     var ownerName = document.getElementById('ownerName').value;
+        //     var contactNumber = document.getElementById('contactNumber').value;
+        //     // Add validation for other fields as needed
+
+        //     // Check if required fields are filled
+        //     if (ownerName === '' || contactNumber === '') {
+        //         alert('Please fill all required fields.');
+        //         return false; // Return false to prevent proceeding to the next step
+        //     }
+        //     return true; // Return true if validation passes
+        // }
+
+
+
+
+
+
+
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            document.getElementById(cityName).style.display = "block";
+        }
+
+        function nextTab(nextCity) {
+            var tabcontent = document.getElementsByClassName("tabcontent");
+            for (var i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            document.getElementById(nextCity).style.display = "block";
+        }
+
+        function prevTab(prevCity) {
+            var tabcontent = document.getElementsByClassName("tabcontent");
+            for (var i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            document.getElementById(prevCity).style.display = "block";
+        }
+
+        function submitAllForms() {
+            var forms = document.querySelectorAll('form');
+            var combinedFormData = new FormData();
+            var loader = document.getElementById('loader');
+
+            loader.style.display = 'block'; // Show loader
+
+            forms.forEach(function (form) {
+                var formData = new FormData(form);
+                formData.forEach(function (value, key) {
+                    combinedFormData.append(key, value);
+                });
+            });
+
+            fetch('http://localhost:3000/submit', {
+                method: 'POST',
+                body: combinedFormData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    alert('Forms submitted successfully!');
+                    loader.style.display = 'none'; // Hide loader on success
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    loader.style.display = 'none'; // Hide loader on error
+                });
+
+
+            // Show popup after form submission
+            document.getElementById('popup').style.display = 'block';
+
+            // Hide popup after 3 seconds
+            setTimeout(function () {
+                document.getElementById('popup').style.display = 'none';
+            }, 6000);
+        }
+
+
+
+    </script>
+
+    <!-- scripts for navbar  -->
+    <script src="navbar.js"></script>
+    <!-- scripts for navbar  -->
+    <!-- <script src="script.js"></script> -->
+</body>
+
+</html>

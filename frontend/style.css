@@ -1,0 +1,140 @@
+/* Reset some default styles */
+body, h2, label, input, textarea, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Background and font settings */
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f7f6;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* padding: 20px; */
+  }
+  
+  /* Form container styling */
+  .form-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+  }
+  
+  /* Form title styling */
+  .form-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-align: center;
+    color: #5e72e4;
+  }
+  
+  /* Form elements styling */
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+  
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="url"],
+  input[type="time"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  textarea {
+    resize: vertical;
+    height: 80px;
+  }
+  
+  input[type="file"] {
+    margin-bottom: 20px;
+  }
+  
+  button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    background: #5e72e4;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  button[type="submit"]:hover {
+    background: #324cdd;
+  }
+  
+
+
+  /* TAB CSS */
+
+
+
+
+
+
+  /*
+  /* Tab container 
+.tab-container {
+    display: flex;
+  }
+  
+  Tabs
+  .tab {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .tab input[type="radio"] {
+    display: none;
+  }
+  
+  .tab label {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-bottom: none;
+  }
+  
+  .tab label:hover {
+    background-color: #e0e0e0;
+  }
+  
+  Tab content
+  .tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+  }
+  
+  Show tab content when radio input is checked
+  .tab input[type="radio"]:checked + label {
+    background-color: #fff;
+    border-bottom: 1px solid #fff;
+  }
+  
+  .tab input[type="radio"]:checked + label + .tab-content {
+    display: block;
+  }
+  
+  *

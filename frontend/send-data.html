@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submission</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- LINK FOR THE NAVBAR SECTION  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="navbar.css">
+    <!-- LINK FOR THE NAVBAR SECTION  -->
+
+    <!-- LINKS FOR HERO SECTION -->
+    <link rel="stylesheet" href="hero.css">
+    <!-- LINKS FOR HERO SECTION -->
+
+    <link rel="stylesheet" href="separator.css">
+    <link rel="stylesheet" href="footer.css">
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding-top: 200px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab {
+            overflow: hidden;
+            background-color: #f1f1f1;
+            margin-top: 20px;
+        }
+
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+        .tab button:hover {
+            background-color: #ddd;
+            border-radius: 5px;
+
+        }
+
+        .tab button.active {
+            background-color: #ddd;
+            border-radius: 22px;
+
+        }
+
+        #London {
+            display: block;
+        }
+
+        .tabcontent {
+            display: none;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .tabcontent.active {
+            display: block;
+        }
+
+        .nav-button {
+            background-color: #5e72e4;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 12px;
+        }
+
+        .nav-button:hover {
+            background-color: white;
+            color: black;
+            border: 2px solid #5e72e4;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #3498db;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+        }
+
+        form label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        form input,
+        form textarea,
+        form select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 4px;
+        }
+
+        .form-grid .full-width {
+            grid-column: span 1;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER SECTION STARTS HERE -->
+    <script src="header.js"></script>
+    <!-- HEADER SECTION ENDS HERE -->
+
+    <div class="container">
+        <div class="popup" id="popup">
+            <h2 style="color: green;">Form submitted successfully!</h2>
+        </div>
+
+        <section>
+            <div class="tab">
+                <button id="info" class="tablinks" onclick="openCity(event, 'London')">Hotel Information</button>
+                <button class="tablinks" onclick="openCity(event, 'Paris')">Room Details</button>
+                <button class="tablinks" onclick="openCity(event, 'Tokyo')">Website Details</button>
+                <button class="tablinks" onclick="openCity(event, 'India')">OTA Details</button>
+                <button class="tablinks" onclick="openCity(event, 'India')">OTA Details</button>
+            </div>
+
+
+            <div id="London" class="tabcontent">
+                <h2>Submit Your Hotel Information for London</h2>
+                <form id="londonForm" enctype="multipart/form-data">
+                    <div class="form-grid">
+                        <div>
+                            <label for="ownerName">Owner Name</label>
+                            <input type="text" id="ownerName" name="ownerName" class="ownerName"
+                                placeholder="Enter owner name" required>
+                        </div>
+                        <div>
+                            <label for="contactNumber">Contact Number</label>
+                            <input type="tel" id="contactNumber" name="contactNumber" placeholder="Enter contact number"
+                                required>
+                        </div>
+                        <div>
+                            <label for="gmName">Name of The G.M</label>
+                            <input type="text" id="gmName" name="gmName" placeholder="Enter G.M name" required>
+                        </div>
+                        <div>
+                            <label for="gmContactPhone">Contact Phone (G.M)</label>
+                            <input type="tel" id="gmContactPhone" name="gmContactPhone"
+                                placeholder="Enter G.M contact phone" required>
+                        </div>
+                        <div>
+                            <label for="companyName">Company Name</label>
+                            <input type="text" id="companyName" name="companyName" placeholder="Enter company name"
+                                required>
+                        </div>
+                        <div>
+                            <label for="companyDisplayName">Company Display Name</label>
+                            <input type="text" id="companyDisplayName" name="companyDisplayName"
+                                placeholder="Enter company display name" required>
+                        </div>
+                        <div>
+                            <label for="contactEmail">Contact Email</label>
+                            <input type="email" id="contactEmail" name="contactEmail" placeholder="Enter contact email"
+                                required>
+                        </div>
+                        <div>
+                            <label for="contactPhone">Contact Phone</label>
+                            <input type="tel" id="contactPhone" name="contactPhone" placeholder="Enter contact phone"
+                                required>
+                        </div>
+                        <div class="full-width">
+                            <label for="hotelWebUrl">Hotel Web URL</label>
+                            <input type="url" id="hotelWebUrl" name="hotelWebUrl" placeholder="Enter hotel web URL"
+                                required>
+                        </div>
+                        <div class="full-width">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" name="address" placeholder="Enter address" required></input>
+                        </div>
+                        <div>
+                            <label for="state">State</label>
+                            <input type="text" id="state" name="state" placeholder="Enter state" required>
+                        </div>
+                        <div>
+                            <label for="pincode">Pincode</label>
+                            <input type="text" id="pincode" name="pincode" placeholder="Enter pincode" required>
+                        </div>
+                        <div>
+                            <label for="checkIn">Check In Time</label>
+                            <input type="time" id="checkIn" name="checkIn" placeholder="Select check-in time" required>
+                        </div>
+                        <div>
+                            <label for="checkOut">Check Out Time</label>
+                            <input type="time" id="checkOut" name="checkOut" placeholder="Select check-out time"
+                                required>
+                        </div>
+
+
+                        <div class="full-width">
+                            <label for="images">Upload Images</label>
+                            <input type="file" id="images" name="images" accept="image/*" multiple required>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <button type="button" class="nav-button" onclick="nextTab('Paris')">Next</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="Paris" class="tabcontent">
+                <h2>Submit Your First Room Details</h2>
+                <form id="parisForm" enctype="multipart/form-data">
+
+                    <!-- 1st Room Contents -->
+                    <div class="form-grid">
+                        <div>
+                            <label for="roomName">Room Name</label>
+                            <input type="text" id="roomName" name="roomName" required>
+                        </div>
+                        <div>
+                            <label for="noOfRooms">No Of Rooms</label>
+                            <input type="number" id="noOfRooms" name="noOfRooms" required>
+                        </div>
+                        <div>
+                            <label for="roomSize">Room Size</label>
+                            <input type="text" id="roomSize" name="roomSize" required>
+                        </div>
+                        <div>
+                            <label for="bedType">Bed Type</label>
+                            <select id="bedType" name="bedType" required>
+                                <option value="Single Bed">Single Bed</option>
+                                <option value="Twin Bed">Twin Bed</option>
+                                <option value="Triple Bed">Triple Bed</option>
+                                <option value="King Size Bed">King Size Bed</option>
+                                <option value="Queen Bed">Queen Bed</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="ratePlan">Rate Plan</label>
+                            <select id="ratePlan" name="ratePlan" required>
+                                <option value="EP">EP(European Plan)</option>
+                                <option value="CP">CP (Continental Plan)</option>
+                                <option value="MAP">MAP (Modified American Plan )</option>
+                                <option value="AP">AP (American Plan)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="roomView">Room View</label>
+                            <select id="roomView" name="roomView" required>
+                                <option value="EP">Mountain View</option>
+                                <option value="CP">Sea View</option>
+                                <option value="MAP">Garden View</option>
+                                <option value="AP">Vally View</option>
+                            </select>
+                        </div>
+
+                        <div class="full-width">
+                            <label for="roomImages1">Room Images -1 </label>
+                            <input type="file" id="roomImages1" name="roomImages1" accept="image/*" multiple required>
+                        </div>
+                        <div class="full-width">
+                            <label for="roomImages2">Room Images -2 </label>
+                            <input type="file" id="roomImages2" name="roomImages2" accept="image/*" multiple required>
+                        </div>
+                        <div class="full-width">
+                            <label for="roomImages3">Room Images -3</label>
+                            <input type="file" id="roomImages3" name="roomImages3" accept="image/*" multiple required>
+                        </div>
+
+                        <div>
+                            <label for="occupancy">Occupancy</label>
+                            <input type="number" id="occupancy" name="occupancy" required>
+                        </div>
+                        <div class="full-width">
+                            <label for="amenities">Room Amenities (Separated ,)</label>
+                            <input type="text" id="amenities" name="amenities" placeholder="WiFi, TV, Fridge, etc."
+                                required>
+                        </div>
+                        <div class="full-width">
+                            <label for="zipFile">All Images( Zip File)</label>
+                            <input type="file" id="zipFile" name="zipFile" accept=".zip" required>
+                        </div>
+                    </div>
+                    <!-- 1st Room Contents -->
+
+
+
+
+                    <br><br>
+                    <!-- <h2>such animate, &nbsp;&nbsp; many secret, &nbsp;&nbsp; do hover.</h2> -->
+                    <b class="hr anim"></b>
+
+
+                    <h2>Submit Your Second (2nd) Room Details</h2>
+                    <!-- 2nd  Room Contents -->
+                    <div class="form-grid">
+                        <div>
+                            <label for="roomName">Room Name</label>
+                            <input type="text" id="roomName" name="roomName" required>
+                        </div>
+                        <div>
+                            <label for="noOfRooms">No Of Rooms</label>
+                            <input type="number" id="noOfRooms" name="noOfRooms" required>
+                        </div>
+                        <div>
+                            <label for="roomSize">Room Size</label>
+                            <input type="text" id="roomSize" name="roomSize" required>
+                        </div>
+                        <div>
+                            <label for="bedType">Bed Type</label>
+                            <select id="bedType" name="bedType" required>
+                                <option value="Single Bed">Single Bed</option>
+                                <option value="Twin Bed">Twin Bed</option>
+                                <option value="Triple Bed">Triple Bed</option>
+                                <option value="King Size Bed">King Size Bed</option>
+                                <option value="Queen Bed">Queen Bed</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="ratePlan">Rate Plan</label>
+                            <select id="ratePlan" name="ratePlan" required>
+                                <option value="EP">EP(European Plan)</option>
+                                <option value="CP">CP (Continental Plan)</option>
+                                <option value="MAP">MAP (Modified American Plan )</option>
+                                <option value="AP">AP (American Plan)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="roomView">Room View</label>
+                            <select id="roomView" name="roomView" required>
+                                <option value="EP">Mountain View</option>
+                                <option value="CP">Sea View</option>
+                                <option value="MAP">Garden View</option>
+                                <option value="AP">Vally View</option>
+                            </select>
+                        </div>
+
+                        <div class="full-width">
+                            <label for="roomImages1">Room Images -1 </label>
+                            <input type="file" id="roomImages1" name="roomImages1" accept="image/*" multiple required>
+                        </div>
+                        <div class="full-width">
+                            <label for="roomImages2">Room Images -2 </label>
+                            <input type="file" id="roomImages2" name="roomImages2" accept="image/*" multiple required>
+                        </div>
+                        <div class="full-width">
+                            <label for="roomImages3">Room Images -3</label>
+                            <input type="file" id="roomImages3" name="roomImages3" accept="image/*" multiple required>
+                        </div>
+
+                        <div>
+                            <label for="occupancy">Occupancy</label>
+                            <input type="number" id="occupancy" name="occupancy" required>
+                        </div>
+                        <div class="full-width">
+                            <label for="amenities">Room Amenities (Separated ,)</label>
+                            <input type="text" id="amenities" name="amenities" placeholder="WiFi, TV, Fridge, etc."
+                                required>
+                        </div>
+                        <div class="full-width">
+                            <label for="zipFile">All Images( Zip File)</label>
+                            <input type="file" id="zipFile" name="zipFile" accept=".zip" required>
+                        </div>
+                    </div>
+                    <!-- 2nd  Room Contents -->
+                    <br><br>
+                    <!-- <h2>such animate, &nbsp;&nbsp; many secret, &nbsp;&nbsp; do hover.</h2> -->
+                    <b class="hr anim"></b>
+
+
+                    <h2>Submit Your Third (3rd) Room Details</h2>
+                    <!-- 3rd  Room Contents -->
+                    <div class="form-grid">
+                        <div>
+                            <label for="roomName">Room Name</label>
+                            <input type="text" id="roomName" name="roomName" required>
+                        </div>
+                        <div>
+                            <label for="noOfRooms">No Of Rooms</label>
+                            <input type="number" id="noOfRooms" name="noOfRooms" required>
+                        </div>
+                        <div>
+                            <label for="roomSize">Room Size</label>
+                            <input type="text" id="roomSize" name="roomSize" required>
+                        </div>
+                        <div>
+                            <label for="bedType">Bed Type</label>
+                            <select id="bedType" name="bedType" required>
+                                <option value="Single Bed">Single Bed</option>
+                                <option value="Twin Bed">Twin Bed</option>
+                                <option value="Triple Bed">Triple Bed</option>
+                                <option value="King Size Bed">King Size Bed</option>
+                                <option value="Queen Bed">Queen Bed</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="ratePlan">Rate Plan</label>
+                            <select id="ratePlan" name="ratePlan" required>
+                                <option value="EP">EP(European Plan)</option>
+                                <option value="CP">CP (Continental Plan)</option>
+                                <option value="MAP">MAP (Modified American Plan )</option>
+                                <option value="AP">AP (American Plan)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="roomView">Room View</label>
+                            <select id="roomView" name="roomView" required>
+                                <option value="EP">Mountain View</option>
+                                <option value="CP">Sea View</option>
+                                <option value="MAP">Garden View</option>
+                                <option value="AP">Vally View</option>
+                            </select>
+                        </div>
+
+                        <div class="full-width">
+                            <label for="roomImages1">Room Images -1 </label>
+                            <input type="file" id="roomImages1" name="roomImages1" accept="image/*" multiple required>
+                        </div>
+                        <div class="full-width">
+                            <label for="roomImages2">Room Images -2 </label>
+                            <input type="file" id="roomImages2" name="roomImages2" accept="image/*" multiple required>
+                        </div>
+                        <div class="full-width">
+                            <label for="roomImages3">Room Images -3</label>
+                            <input type="file" id="roomImages3" name="roomImages3" accept="image/*" multiple required>
+                        </div>
+
+                        <div>
+                            <label for="occupancy">Occupancy</label>
+                            <input type="number" id="occupancy" name="occupancy" required>
+                        </div>
+                        <div class="full-width">
+                            <label for="amenities">Room Amenities (Separated ,)</label>
+                            <input type="text" id="amenities" name="amenities" placeholder="WiFi, TV, Fridge, etc."
+                                required>
+                        </div>
+                        <div class="full-width">
+                            <label for="zipFile">All Images( Zip File)</label>
+                            <input type="file" id="zipFile" name="zipFile" accept=".zip" required>
+                        </div>
+                    </div>
+                    <!-- 3rd  Room Contents -->
+
+
+
+                    <div class="button-container">
+                        <button type="button" class="nav-button" onclick="prevTab('London')">Previous</button>
+                        <button type="button" class="nav-button" onclick="nextTab('Tokyo')">Next</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="Tokyo" class="tabcontent">
+                <h2>Submit Your Website Details</h2>
+                <form id="tokyoForm" enctype="multipart/form-data">
+                    <div class="form-grid">
+                        <div>
+                            <label for="fnames">Have Any Site</label>
+                            <select id="bedType" name="bedType" required>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="fnames">Is The Site Active</label>
+                            <select id="bedType" name="bedType" required>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="fnames">Website Url</label>
+                            <input type="text" id="fnames" name="fnames" placeholder="https://bookingjini.com">
+                        </div>
+                        <!-- <>Submit Your Website Details</> -->
+                        <div>
+                            <label for="bedType">Hosting Provider</label>
+                            <select id="bedType" name="bedType" required>
+                                <option value="GoDaddy">GoDaddy</option>
+                                <option value="Hostinger">Hostinger</option>
+                                <option value="Bluehost">Bluehost</option>
+                                <option value="HostGator">HostGator</option>
+                                <option value="WordPress">WordPress</option>
+                                <option value="BigRock">BigRock</option>
+                                <option value="Google Host">Google Host</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="fnames">User Id / E-mail</label>
+                            <input type="text" id="fnames" name="fnames">
+                        </div>
+                        <div>
+                            <label for="fnames">Password</label>
+                            <input type="text" id="fnames" name="fnames">
+                        </div>
+
+                        <div>
+                            <label for="bedType">Domain Provider</label>
+                            <select id="bedType" name="bedType" required>
+                                <option value="GoDaddy">GoDaddy</option>
+                                <option value="Hostinger">Hostinger</option>
+                                <option value="Bluehost">Bluehost</option>
+                                <option value="HostGator">HostGator</option>
+                                <option value="WordPress">WordPress</option>
+                                <option value="BigRock">BigRock</option>
+                                <option value="Google Host">Google Host</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+
+                        <div>
+                            <label for="fnames">User Id / E-mail</label>
+                            <input type="text" id="fnames" name="fnames">
+                        </div>
+                        <div>
+                            <label for="fnames">Password</label>
+                            <input type="text" id="fnames" name="fnames">
+                        </div>
+                        <div>
+                            <label for="fnames">Login Url (Cpanel/Hosting)</label>
+                            <input type="text" id="fnames" name="fnames">
+                        </div>
+                        <div>
+                            <label for="fnames">Login Url (Domain)</label>
+                            <input type="text" id="fnames" name="fnames">
+                        </div>
+                        <div>
+                            <label for="fnames">My Developer Number</label>
+                            <input type="text" id="fnames" name="fnames" placeholder="91-8XX2 XXX XXX">
+                        </div>
+
+                    </div>
+                    <div class="button-container">
+                        <button type="button" class="nav-button" onclick="prevTab('Paris')">Previous</button>
+                        <button type="button" class="nav-button" onclick="submitAllForms()">Submit All</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="India" class="tabcontent">
+                <h2>Submit Your Website Details</h2>
+                <form id="indiaForm" enctype="multipart/form-data">
+                    <div class="form-grid">
+                        <div>
+                            <label for="fnames">Have Any Site</label>
+                            <select id="bedType" name="bedType" required>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="fnames">Is The Site Active</label>
+                            <select id="bedType" name="bedType" required>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="fnames">Website Url</label>
+                            <input type="text" id="fnames" name="fnames" placeholder="https://bookingjini.com">
+                        </div>
+                        <!-- <>Submit Your Website Details</> -->
+                        <div>
+                            <label for="bedType">Hosting Provider</label>
+                            <select id="bedType" name="bedType" required>
+                                <option value="GoDaddy">GoDaddy</option>
+                                <option value="Hostinger">Hostinger</option>
+                                <option value="Bluehost">Bluehost</option>
+                                <option value="HostGator">HostGator</option>
+                                <option value="WordPress">WordPress</option>
+                                <option value="BigRock">BigRock</option>
+                                <option value="Google Host">Google Host</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="fnames">User Id / E-mail</label>
+                            <input type="text" id="fnames" name="fnames">
+                        </div>
+                        <div>
+                            <label for="fnames">Password</label>
+                            <input type="text" id="fnames" name="fnames">
+                        </div>
+
+                        <div>
+                            <label for="bedType">Domain Provider</label>
+                            <select id="bedType" name="bedType" required>
+                                <option value="GoDaddy">GoDaddy</option>
+                                <option value="Hostinger">Hostinger</option>
+                                <option value="Bluehost">Bluehost</option>
+                                <option value="HostGator">HostGator</option>
+                                <option value="WordPress">WordPress</option>
+                                <option value="BigRock">BigRock</option>
+                                <option value="Google Host">Google Host</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+
+                        <div>
+                            <label for="fnames">User Id / E-mail</label>
+                            <input type="text" id="fnames" name="fnames">
+                        </div>
+                        <div>
+                            <label for="fnames">Password</label>
+                            <input type="text" id="fnames" name="fnames">
+                        </div>
+                        <div>
+                            <label for="fnames">Login Url (Cpanel/Hosting)</label>
+                            <input type="text" id="fnames" name="fnames">
+                        </div>
+                        <div>
+                            <label for="fnames">Login Url (Domain)</label>
+                            <input type="text" id="fnames" name="fnames">
+                        </div>
+                        <div>
+                            <label for="fnames">My Developer Number</label>
+                            <input type="text" id="fnames" name="fnames" placeholder="91-8XX2 XXX XXX">
+                        </div>
+
+                    </div>
+                    <div class="button-container">
+                        <button type="button" class="nav-button" onclick="prevTab('Paris')">Previous</button>
+                        <button type="button" class="nav-button" onclick="submitAllForms()">Submit All</button>
+                    </div>
+                </form>
+            </div>
+
+
+
+        </section>
+    </div>
+
+    <!-- Loader -->
+    <div class="loader" id="loader"></div>
+
+
+    <script src="footer.js"></script>
+
+
+
+    <script>
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+
+            document.getElementById(cityName).style.display = "block";
+
+
+            evt.currentTarget.classList.add("active");
+        }
+
+
+        // nextTab
+
+        function nextTab(nextCity) {
+            var tabcontent = document.getElementsByClassName("tabcontent");
+            for (var i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+        }
+
+        //prevTab
+        function prevTab(prevCity) {
+            var tabcontent = document.getElementsByClassName("tabcontent");
+            for (var i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            document.getElementById(prevCity).style.display = "block";
+        }
+
+        function submitAllForms() {
+            var forms = document.querySelectorAll('form');
+            var combinedFormData = new FormData();
+            var loader = document.getElementById('loader');
+
+            loader.style.display = 'block'; // Show loader
+
+            forms.forEach(function (form) {
+                var formData = new FormData(form);
+                formData.forEach(function (value, key) {
+                    combinedFormData.append(key, value);
+                });
+            });
+
+            fetch('http://localhost:3000/submit', {
+                method: 'POST',
+                body: combinedFormData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    alert('Forms submitted successfully!');
+                    loader.style.display = 'none'; // Hide loader on success
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    loader.style.display = 'none'; // Hide loader on error
+                });
+
+            // Prevent default form submission
+            event.preventDefault();
+
+            // Show popup after form submission
+            document.getElementById('popup').style.display = 'block';
+
+            // Hide popup after 3 seconds
+            setTimeout(function () {
+                document.getElementById('popup').style.display = 'none';
+            }, 6000);
+        }
+    </script>
+
+    <!-- scripts for navbar  -->
+    <script src="navbar.js"></script>
+    <!-- scripts for navbar  -->
+</body>
+
+</html>
